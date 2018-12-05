@@ -11,14 +11,14 @@ before_install:
 - export SFDX_DOMAIN_RETRY=300
 - export SFDX_DISABLE_APP_HUB=true
 - export SFDX_LOG_LEVEL=DEBUG
-- export SFDX_AUDIENCE_URL=na999.salesforce.com
+- export SFDX_AUDIENCE_URL=https://na999.salesforce.com
 - mkdir sfdx
 - wget -qO- $URL | tar xJ -C sfdx --strip-components 1
 - "./sfdx/install"
 - export PATH=./sfdx/$(pwd):$PATH
 - sfdx --version
 - sfdx plugins --core
-- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile assets/server.key
+- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY -r https://na999.salesforce.com --jwtkeyfile assets/server.key
   --username $USERNAME -s -a sbx
 script:
 - sfdx force:source:deploy -u sbx
